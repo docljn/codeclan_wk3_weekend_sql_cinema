@@ -23,6 +23,11 @@ class Customer
     end
   end
 
+
+
+  # should probably make these private as they are only used in .save()
+  private
+
   def insert()
     # to add a new customer to the database, returning the new id
     sql = "INSERT INTO customers (name, funds) VALUES ($1, $2) RETURNING id;"

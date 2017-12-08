@@ -8,6 +8,9 @@ customer1 = Customer.new({
 })
 
 customer1.save()
+
+customer1.name= 'Neil Gaiman'
+customer1.save()
 #
 #
 # film1 = Film.new()

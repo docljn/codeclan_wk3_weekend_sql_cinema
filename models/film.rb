@@ -42,7 +42,8 @@ class Film
   end
 
   def customers()
-    sql = " SELECT customers.* FROM customers
+    # should this be DISTINCT to find each customer once?
+    sql = " SELECT DISTINCT customers.* FROM customers
             INNER JOIN tickets
             ON tickets.customer_id = customers.id
             WHERE tickets.film_id = $1;"
@@ -60,6 +61,9 @@ class Film
     end
   end
 
+  def tickets_sold()
+
+  end
 
   # private methods
   private

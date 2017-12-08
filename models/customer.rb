@@ -11,7 +11,7 @@ class Customer
   def initialize(options)
     @id     = options['id'].to_i if options['id']
     @name   = options['name']
-    @funds  = options['funds']
+    @funds  = options['funds'].to_i
   end
 
   # class methods
@@ -47,13 +47,22 @@ class Customer
   end
 
   def films()
-    sql = " SELECT films.* FROM films
+    sql = " SELECT DISTINCT films.* FROM films
             INNER JOIN tickets
             ON films.id = tickets.film_id
             where tickets.customer_id = $1;"
     values = [@id]
     sql_result = SqlRunner.run(sql, values)
     films = sql_result.map {|hash| Film.new(hash)}
+  end
+
+  def pay(amount)
+    if @funds >= amount
+      @funds -= amount
+      save()
+    else
+      return "Declined"
+    end
   end
 
 

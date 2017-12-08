@@ -84,29 +84,22 @@ film3.delete()
 found_film = Film.find_one(film2.id)
 
 
-ticket1 = Ticket.new({
-  'customer_id' => customer1.id,
-  'film_id' => film2.id
-  })
-ticket1.save()
+# original method for generating a new ticket
+# ticket1 = Ticket.new({
+#   'customer_id' => customer1.id,
+#   'film_id' => film2.id
+#   })
+# ticket1.save()
 
-ticket2 = Ticket.new({
-  'customer_id' => customer2.id,
-  'film_id' => film4.id
-  })
-ticket2.save()
+ticket1 = Ticket.sell(customer1, film2)
 
-ticket3 = Ticket.new({
-  'customer_id' => customer1.id,
-  'film_id' => film4.id
-  })
-ticket3.save()
+ticket2 = Ticket.sell(customer2, film4)
 
-ticket4 = Ticket.new({
-  'customer_id' => customer3.id,
-  'film_id' => film4.id
-  })
-ticket4.save()
+ticket3 = Ticket.sell(customer1, film4)
+
+ticket4 = Ticket.sell(customer3, film4)
+
+ticket5 = Ticket.sell(customer1, film2)
 
 ticket4.delete()
 

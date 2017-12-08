@@ -2,6 +2,7 @@
 require('pry')
 require_relative('./models/customer.rb')
 require_relative('./models/film.rb')
+require_relative('./models/ticket.rb')
 
 Customer.delete_all()
 Film.delete_all()
@@ -79,15 +80,14 @@ film4.save()
 
 film3.delete()
 
-
-
 found_film = Film.find_one(film2.id)
 
 
-
-#
-# ticket1 = Ticket.new()
-# ticket1.save()
+ticket1 = Ticket.new({
+  'customer_id' => customer1.id,
+  'film_id' => film1.id
+  })
+ ticket1.save()
 
 binding.pry
 nil

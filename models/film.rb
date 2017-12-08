@@ -13,9 +13,18 @@ class Film
 
   # class methods
   def self.delete_all()
+    sql = "DELETE FROM films;"
+    sql_result = SqlRunner.run(sql)
   end
 
   # instance methods
+
+  def delete()
+    sql = "DELETE FROM films WHERE id = $1;"
+    values = [@id]
+    sql_result = SqlRunner.run(sql)
+    return nil
+  end
 
   def save()
     if @id

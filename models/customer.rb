@@ -23,6 +23,12 @@ class Customer
 
   # instance methods
 
+  def delete()
+    sql = "DELETE FROM customers WHERE ID = $1;"
+    values = [@id]
+    sql_result = SqlRunner.run(sql, values)
+  end
+
   def save()
     # removes need to know if you are inserting/updating
     if @id

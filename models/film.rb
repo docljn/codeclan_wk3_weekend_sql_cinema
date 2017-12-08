@@ -17,12 +17,28 @@ class Film
     sql_result = SqlRunner.run(sql)
   end
 
+  def self.find_one(id)
+    sql = "SELECT * FROM films WHERE id = $1;"
+    values = [id]
+    sql_result = SqlRunner.run(sql, values)
+    if sql_result.count == 0
+      return nil
+    end
+    return Film.new(sql_result[0])
+  end
+
+  def self.return_all()
+    sql = "SELECT * FROM films;"
+    sql_result = SqlRunner.run(sql)
+    return sql_result.map {|hash| Film.new(hash)}
+  end
+
   # instance methods
 
   def delete()
     sql = "DELETE FROM films WHERE id = $1;"
     values = [@id]
-    sql_result = SqlRunner.run(sql)
+    sql_result = SqlRunner.run(sql, values)
     return nil
   end
 

@@ -81,6 +81,9 @@ film3.delete()
 
 
 
+found_film = Film.find_one(film2.id)
+
+
 
 #
 # ticket1 = Ticket.new()

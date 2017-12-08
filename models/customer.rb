@@ -14,6 +14,15 @@ class Customer
     @funds  = options['funds']
   end
 
+  # class methods
+
+  def self.delete_all()
+    sql = "DELETE FROM customers;"
+    sql_result = SqlRunner.run(sql)
+  end
+
+  # instance methods
+
   def save()
     # removes need to know if you are inserting/updating
     if @id

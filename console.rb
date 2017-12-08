@@ -35,6 +35,8 @@ customer1.save()
 
 customer4.delete
 
+customers = Customer.return_all()
+
 
 #
 #

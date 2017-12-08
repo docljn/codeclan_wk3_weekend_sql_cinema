@@ -21,6 +21,13 @@ class Customer
     sql_result = SqlRunner.run(sql)
   end
 
+  def self.return_all()
+    sql = "SELECT * FROM customers;"
+    sql_result = SqlRunner.run(sql)
+    customers = sql_result.map {|customer_hash| Customer.new(customer_hash)}
+    return customers
+  end
+
   # instance methods
 
   def delete()

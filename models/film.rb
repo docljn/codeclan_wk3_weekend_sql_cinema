@@ -39,7 +39,6 @@ class Film
     sql = "DELETE FROM films WHERE id = $1;"
     values = [@id]
     sql_result = SqlRunner.run(sql, values)
-    return nil
   end
 
   def save()

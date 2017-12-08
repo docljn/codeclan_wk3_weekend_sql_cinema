@@ -13,7 +13,18 @@ class Ticket
 
   # class methods
 
+  def self.delete_all()
+    sql = "DELETE FROM tickets;"
+    sql_result = SqlRunner.run(sql)
+  end
+
   # instance methods
+
+  def delete()
+    sql = "DELETE FROM tickets WHERE id = $1;"
+    values = [@id]
+    sql_result = SqlRunner.run(sql, values)
+  end
 
   def save()
     if @id

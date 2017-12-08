@@ -6,6 +6,7 @@ require_relative('./models/ticket.rb')
 
 Customer.delete_all()
 Film.delete_all()
+Ticket.delete_all()
 
 customer1 = Customer.new({
   'name' => 'Maya Angelou',
@@ -85,9 +86,29 @@ found_film = Film.find_one(film2.id)
 
 ticket1 = Ticket.new({
   'customer_id' => customer1.id,
-  'film_id' => film1.id
+  'film_id' => film2.id
   })
- ticket1.save()
+ticket1.save()
+
+ticket2 = Ticket.new({
+  'customer_id' => customer2.id,
+  'film_id' => film4.id
+  })
+ticket2.save()
+
+ticket3 = Ticket.new({
+  'customer_id' => customer1.id,
+  'film_id' => film4.id
+  })
+ticket3.save()
+
+ticket4 = Ticket.new({
+  'customer_id' => customer3.id,
+  'film_id' => film4.id
+  })
+ticket4.save()
+
+ticket4.delete()
 
 binding.pry
 nil

@@ -47,28 +47,34 @@ film1 = Film.new({
   'title' => 'The Third Man',
   'price' => 1000
   })
-# film1.save()
+film1.save()
 
 film2 = Film.new({
   'title' => 'Metropolis',
   'price' => 800
   })
-# film2.save()
+film2.save()
+
 film3 = Film.new({
   'title' => 'Steel Magnolias',
   'price' => 650
   })
-# film3.save()
+film3.save()
+
 film4 = Film.new({
   'title' => 'Star Wars: Return of the Jedi',
   'price' => 1000
   })
-# film4.save()
+film4.save()
+
 film5 = Film.new({
   'title' => 'Driving Miss Daisy',
   'price' => 500
   })
-# film5.save()
+film5.save()
+
+film4.price = 250
+film4.save()
 
 
 

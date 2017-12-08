@@ -25,6 +25,9 @@ class Customer
     sql = "SELECT * FROM customers WHERE id = $1;"
     values = [id]
     sql_result = SqlRunner.run(sql, values)
+    if sql_result.count() == 0
+      return nil
+    end
     customer = Customer.new(sql_result[0])
   end
 

@@ -6,14 +6,14 @@ DROP TABLE IF EXISTS films;
 
 CREATE TABLE customers (
   id SERIAL4 PRIMARY KEY,
-  name VARCHAR(255),
+  name VARCHAR(255) NOT NULL,
   funds INT4
 );
 
 
 CREATE TABLE films (
   id SERIAL4 PRIMARY KEY,
-  title VARCHAR(255),
+  title VARCHAR(255) NOT NULL,
   price INT4
 );
 

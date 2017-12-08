@@ -21,6 +21,13 @@ class Customer
     sql_result = SqlRunner.run(sql)
   end
 
+  def self.find_one(id)
+    sql = "SELECT * FROM customers WHERE id = $1;"
+    values = [id]
+    sql_result = SqlRunner.run(sql, values)
+    customer = Customer.new(sql_result[0])
+  end
+
   def self.return_all()
     sql = "SELECT * FROM customers;"
     sql_result = SqlRunner.run(sql)
@@ -35,6 +42,8 @@ class Customer
     values = [@id]
     sql_result = SqlRunner.run(sql, values)
   end
+
+
 
   def save()
     # removes need to know if you are inserting/updating

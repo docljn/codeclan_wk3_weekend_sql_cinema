@@ -37,6 +37,8 @@ customer4.delete
 
 customers = Customer.return_all()
 
+found = Customer.find_one(14)
+
 
 #
 #

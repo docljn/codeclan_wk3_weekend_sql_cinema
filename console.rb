@@ -41,7 +41,7 @@ customer4.delete
 
 customers = Customer.return_all()
 
-found = Customer.find_one(customer3.id)
+found_customer = Customer.find_one(customer3.id)
 
 
 
@@ -109,6 +109,9 @@ ticket4 = Ticket.new({
 ticket4.save()
 
 ticket4.delete()
+
+tickets = Ticket.return_all()
+found_ticket = Ticket.find_one(ticket2.id)
 
 binding.pry
 nil

@@ -18,6 +18,20 @@ class Ticket
     sql_result = SqlRunner.run(sql)
   end
 
+  def self.find_one(id)
+    sql = "SELECT * FROM tickets  WHERE id = $1;"
+    values = [id]
+    sql_result = SqlRunner.run(sql, values)
+    return Ticket.new(sql_result[0])
+  end
+
+  def self.return_all()
+    sql = "SELECT * FROM tickets;"
+    sql_result = SqlRunner.run(sql)
+    tickets = sql_result.map {|hash| Ticket.new(hash)}
+    return tickets
+  end
+
   # instance methods
 
   def delete()

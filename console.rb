@@ -113,6 +113,11 @@ ticket4.delete()
 tickets = Ticket.return_all()
 found_ticket = Ticket.find_one(ticket2.id)
 
+
+attending_film4 = film4.customers()
+
+customer1_films = customer1.films()
+
 binding.pry
 nil
 

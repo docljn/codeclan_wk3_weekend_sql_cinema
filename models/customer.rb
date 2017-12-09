@@ -40,6 +40,10 @@ class Customer
 
   # instance methods
 
+  def can_afford?(amount)
+    @funds >= amount
+  end
+
   def delete()
     sql = "DELETE FROM customers WHERE ID = $1;"
     values = [@id]
@@ -56,8 +60,10 @@ class Customer
     films = sql_result.map {|hash| Film.new(hash)}
   end
 
+
+
   def pay(amount)
-    if @funds >= amount
+    if can_afford?(amount)
       @funds -= amount
       save()
     else

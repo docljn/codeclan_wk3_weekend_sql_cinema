@@ -10,7 +10,7 @@ Ticket.delete_all()
 
 customer1 = Customer.new({
   'name' => 'Maya Angelou',
-  'funds' => '5000'
+  'funds' => '500'
 })
 
 customer1.save()
@@ -92,23 +92,18 @@ found_film = Film.find_one(film2.id)
 # ticket1.save()
 
 ticket1 = Ticket.sell(customer1, film2)
-
 ticket2 = Ticket.sell(customer2, film4)
-
 ticket3 = Ticket.sell(customer1, film4)
-
 ticket4 = Ticket.sell(customer3, film4)
-
-ticket5 = Ticket.sell(customer1, film2)
+ticket5 = Ticket.sell(customer2, film2)
 
 ticket4.delete()
 
 tickets = Ticket.return_all()
 found_ticket = Ticket.find_one(ticket2.id)
 
-
 attending_film4 = film4.customers()
-
+tickets_sold_film4 = film4.tickets().count
 customer1_films = customer1.films()
 
 binding.pry

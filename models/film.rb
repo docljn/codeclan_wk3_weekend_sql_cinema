@@ -33,6 +33,8 @@ class Film
     return sql_result.map {|hash| Film.new(hash)}
   end
 
+
+
   # instance methods
 
   def delete()
@@ -61,9 +63,18 @@ class Film
     end
   end
 
-  def tickets_sold()
-
+  def tickets()
+    sql = "SELECT * FROM tickets
+    WHERE film_id = $1;"
+    values = [@id]
+    sql_result = SqlRunner.run(sql, values)
+    return sql_result.map {|hash| Ticket.new(hash)}
   end
+
+  def tickets_count()
+    return tickets().count
+  end
+
 
   # private methods
   private

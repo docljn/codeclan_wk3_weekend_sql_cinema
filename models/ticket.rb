@@ -32,19 +32,21 @@ class Ticket
     return tickets
   end
 
+
   def self.sell(customer, film)
-    # customer pays for ticket
-    customer.pay(film.price)
-
     # film screening attendance increases by 1
+    # if and only if there is room in the cinema
 
-
+    # customer pays for ticket
+    if customer.can_afford?(film.price)
+      customer.pay(film.price)
+      ticket = Ticket.new({
+        'customer_id' => customer.id,
+        'film_id' => film.id
+        })
+      ticket.save()
+    end
     # ticket is created
-    ticket = Ticket.new({
-      'customer_id' => customer.id,
-      'film_id' => film.id
-      })
-    ticket.save()
     return ticket
   end
 

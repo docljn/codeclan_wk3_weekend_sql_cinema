@@ -55,6 +55,10 @@ class Film
     return customers
   end
 
+  def customer_count()
+    return customers.count()
+  end
+
   def save()
     if @id
       update()
@@ -72,7 +76,12 @@ class Film
   end
 
   def tickets_count()
-    return tickets().count
+    # return tickets().count
+    sql = "SELECT SUM(1) FROM tickets
+    WHERE film_id = $1;"
+    values = [@id]
+    sql_result = SqlRunner.run(sql, values)
+    return sql_result[0]['sum']
   end
 
 

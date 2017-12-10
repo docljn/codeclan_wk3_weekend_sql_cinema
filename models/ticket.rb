@@ -3,12 +3,13 @@
 class Ticket
 
   attr_reader :id
-  attr_accessor :customer_id, :film_id
+  attr_accessor :customer_id, :film_id, :screening_id
 
   def initialize(options)
       @id = options['id'].to_i if options['id']
       @customer_id = options['customer_id'].to_i
       @film_id = options['film_id'].to_i
+      @screening_id = options['screening_id'].to_i
   end
 
   # class methods
@@ -33,16 +34,18 @@ class Ticket
   end
 
 
-  def self.sell(customer, film)
+  def self.sell(customer, screening)
+
     # film screening attendance increases by 1
     # if and only if there is room in the cinema
 
     # customer pays for ticket
-    if customer.can_afford?(film.price)
-      customer.pay(film.price)
+    if customer.can_afford?(screening.price())
+      customer.pay(screening.price)
       ticket = Ticket.new({
         'customer_id' => customer.id,
-        'film_id' => film.id
+        'film_id' => screening.film_id,
+        'screening_id' => screening.id
         })
       ticket.save()
     end
@@ -70,15 +73,15 @@ class Ticket
   private
 
   def update()
-    sql = "UPDATE tickets SET (title, price) = ($1, $2) WHERE id = $3;"
-    values = [@customer_id, @ticket_id, @id]
+    sql = "UPDATE tickets SET (customer_id, film_id, screening_id) = ($1, $2, $3) WHERE id = $4;"
+    values = [@customer_id, @ticket_id, @screening_id, @id]
     sql_result = SqlRunner.run(sql, values)
     return nil
   end
 
   def insert()
-    sql = "INSERT INTO tickets (customer_id, film_id) VALUES ($1, $2) RETURNING id;"
-    values = [@customer_id, @film_id]
+    sql = "INSERT INTO tickets (customer_id, film_id, screening_id) VALUES ($1, $2, $3) RETURNING id;"
+    values = [@customer_id, @film_id, @screening_id]
     sql_result = SqlRunner.run(sql, values)
     @id = sql_result[0]['id']
     return @id

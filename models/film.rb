@@ -5,6 +5,8 @@ class Film
   attr_reader :id
   attr_accessor :title, :price
 
+  # price is base price for film, which should be modified by the screening based on time...
+
   def initialize(options)
     @id = options['id'] if options['id']
     @title = options['title']
@@ -56,7 +58,7 @@ class Film
   end
 
   def customer_count()
-    return customers.count()
+    return customers.count().to_i
   end
 
   def save()
@@ -65,6 +67,13 @@ class Film
     else
       insert()
     end
+  end
+
+  def popular_time()
+    sql = "SELECT ;"
+    values = []
+    sql_result = SqlRunner.run(sql, values)
+    return '??????????'
   end
 
   def tickets()
@@ -81,7 +90,7 @@ class Film
     WHERE film_id = $1;"
     values = [@id]
     sql_result = SqlRunner.run(sql, values)
-    return sql_result[0]['sum']
+    return sql_result[0]['sum'].to_i
   end
 
 

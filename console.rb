@@ -3,6 +3,7 @@ require('pry')
 require_relative('./models/customer.rb')
 require_relative('./models/film.rb')
 require_relative('./models/ticket.rb')
+require_relative('./models/screening.rb')
 
 Customer.delete_all()
 Film.delete_all()
@@ -91,20 +92,48 @@ found_film = Film.find_one(film2.id)
 #   })
 # ticket1.save()
 
-ticket1 = Ticket.sell(customer1, film2)
-ticket2 = Ticket.sell(customer2, film4)
-ticket3 = Ticket.sell(customer1, film4)
-ticket4 = Ticket.sell(customer3, film4)
-ticket5 = Ticket.sell(customer2, film2)
+# need to redo now that screening instead of film being referenced!
+
+
+
+screening1 = Screening.new({
+  'screening_time' => '22:00',
+  'film_id' => film2.id,
+  'capacity' => '2',
+})
+
+screening2 = Screening.new({
+  'screening_time' => '20:00',
+  'film_id' => film2.id,
+  'capacity' => '4',
+})
+
+screening3 = Screening.new({
+  'screening_time' => '18:00',
+  'film_id' => film4.id,
+  'capacity' => '2',
+})
+
+screening4 = Screening.new({
+  'screening_time' => '22:00',
+  'film_id' => film4.id,
+  'capacity' => '4',
+})
+
+
+screening1.save()
+screening2.save()
+screening3.save()
+screening4.save()
+
+ticket1 = Ticket.sell(customer1, screening2)  # won't be generated because insufficient funds
+ticket2 = Ticket.sell(customer2, screening4)
+ticket3 = Ticket.sell(customer1, screening4)
+ticket4 = Ticket.sell(customer3, screening4)
+ticket5 = Ticket.sell(customer2, screening2)
 
 ticket4.delete()
 
-tickets = Ticket.return_all()
-found_ticket = Ticket.find_one(ticket2.id)
-
-attending_film4 = film4.customers()
-tickets_sold_film4 = film4.tickets().count
-customer1_films = customer1.films()
 
 binding.pry
 nil

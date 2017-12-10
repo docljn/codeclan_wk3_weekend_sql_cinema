@@ -82,6 +82,18 @@ class Customer
     end
   end
 
+  def tickets()
+    sql = "SELECT * FROM tickets WHERE customer_id = $1;"
+    values = [@id]
+    sql_result = SqlRunner.run(sql, values)
+    tickets = sql_result.map {|hash| Ticket.new(hash)}
+    return tickets
+  end
+
+  def tickets_count()
+    return tickets.count()
+  end
+
 
 
   # should probably make these private as they are only used in .save()

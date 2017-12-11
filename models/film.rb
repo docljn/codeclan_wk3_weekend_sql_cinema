@@ -69,11 +69,13 @@ class Film
     end
   end
 
-  def popular_time()
-    sql = "SELECT ;"
-    values = []
+  def most_popular_screening()
+    sql = "select screening_id, count(film_id) from tickets where film_id = $1 group by screening_id order by count(film_id) DESC;"
+    values = [@id]
     sql_result = SqlRunner.run(sql, values)
-    return '??????????'
+    screening_id = sql_result[0]['screening_id'].to_i
+
+    return Screening.find_one(screening_id)
   end
 
   def tickets()

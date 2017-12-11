@@ -65,16 +65,16 @@ class Screening
   private
 
   def insert()
-    sql = "INSERT INTO screenings (screening_time, film_id) VALUES ($1, $2) RETURNING id;"
-    values = [@screening_time, @film_id]
+    sql = "INSERT INTO screenings (screening_time, film_id, capacity) VALUES ($1, $2, $3) RETURNING id;"
+    values = [@screening_time, @film_id, @capacity]
     sql_result = SqlRunner.run(sql, values)
     @id = sql_result[0]['id']
     return @id
   end
 
   def update()
-    sql = "UPDATE screenings SET (time, film_id) = ($1, $2) WHERE id = $3;"
-    values = [@screening_time, @film_id, @id]
+    sql = "UPDATE screenings SET (time, film_id, capacity) = ($1, $2, $3) WHERE id = $4;"
+    values = [@screening_time, @film_id, @capacity, @id]
     sql_result = SqlRunner.run(sql, values)
   end
 

@@ -18,7 +18,7 @@ customer1.save()
 
 customer2 = Customer.new({
   'name' => 'Robert Frost',
-  'funds' => '8000'
+  'funds' => '80000'
 })
 customer2.save()
 
@@ -80,7 +80,7 @@ film5.save()
 film4.price = 250
 film4.save()
 
-film3.delete()
+# film3.delete()
 
 found_film = Film.find_one(film2.id)
 
@@ -120,17 +120,41 @@ screening4 = Screening.new({
   'capacity' => '4',
 })
 
+screening5 = Screening.new({
+  'screening_time' => '20:00',
+  'film_id' => film3.id,
+  'capacity' => '4',
+})
+
+screening6 = Screening.new({
+  'screening_time' => '18:00',
+  'film_id' => film3.id,
+  'capacity' => '4',
+})
+
+screening7 = Screening.new({
+  'screening_time' => '10:00',
+  'film_id' => film4.id,
+  'capacity' => '2',
+})
 
 screening1.save()
 screening2.save()
 screening3.save()
 screening4.save()
+screening5.save()
+screening6.save()
+screening7.save()
 
 ticket1 = Ticket.sell(customer1, screening2)  # won't be generated because insufficient funds
 ticket2 = Ticket.sell(customer2, screening4)
 ticket3 = Ticket.sell(customer1, screening4)
 ticket4 = Ticket.sell(customer3, screening4)
 ticket5 = Ticket.sell(customer2, screening2)
+ticket6 = Ticket.sell(customer2, screening3)
+ticket7 = Ticket.sell(customer2, screening7)
+ticket8 = Ticket.sell(customer2, screening3)
+
 
 ticket4.delete()
 
